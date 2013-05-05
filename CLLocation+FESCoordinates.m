@@ -33,7 +33,7 @@ FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees deg
     return retValue;
 }
 
-@implementation CLLocation (FESGraticule)
+@implementation CLLocation (FESCoordinates)
 
 + (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
                         andLongitude:(FESCLLocationCoordinate2D)longitude

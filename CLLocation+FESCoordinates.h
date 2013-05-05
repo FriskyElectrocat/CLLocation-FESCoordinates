@@ -38,7 +38,7 @@ typedef struct {
 // a convenience funciton to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
 
-@interface CLLocation (FESGraticule)
+@interface CLLocation (FESCoordinates)
 
 + (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
                         andLongitude:(FESCLLocationCoordinate2D)longitude;
