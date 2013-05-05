@@ -13,6 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UIButton *actionButton;
+@property (weak, nonatomic) IBOutlet UIButton *oaklandButton;
+@property (weak, nonatomic) IBOutlet UIButton *wanakaButton;
 @property (weak, nonatomic) IBOutlet UITextField *degreesLat;
 @property (weak, nonatomic) IBOutlet UITextField *minutesLat;
 @property (weak, nonatomic) IBOutlet UITextField *secondsLat;
@@ -22,7 +24,6 @@
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UILabel *coordinatesLabel;
 @property (nonatomic, readwrite) BOOL didZoom;
-@property (nonatomic, readwrite) BOOL firstLoad;
 
 @end
 
@@ -35,7 +36,6 @@
     self.coordinatesLabel.text = @"";
     self.coordinatesLabel.hidden = NO;
     self.didZoom = NO;
-    self.firstLoad = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,24 +71,44 @@
     self.coordinatesLabel.text = [NSString stringWithFormat:@"Latitude: %f Longitude: %f",
                                   location.coordinate.latitude,
                                   location.coordinate.longitude];
-    
-    [self.mapView setCenterCoordinate:location.coordinate animated:YES];
+
+    MKCoordinateRegion region = self.mapView.region;
+
+    region.center = location.coordinate;
+    if (!self.didZoom) {
+        self.didZoom = YES;
+        region.span = MKCoordinateSpanMake(0.5, 0.5);
+    }
+
+    [self.mapView setRegion:region animated:YES];
+//    [self.mapView setCenterCoordinate:location.coordinate animated:YES];
+}
+
+- (IBAction)oaklandButtonPressed:(id)sender {
+    self.degreesLat.text = @"37";
+    self.minutesLat.text = @"46.3";
+    self.secondsLat.text = @"18";
+
+    self.degreesLong.text = @"-122";
+    self.minutesLong.text = @"13";
+    self.secondsLong.text = @"24";
+}
+
+- (IBAction)wankaButtonPressed:(id)sender {
+    // 44°42′S 169°09′E
+    self.degreesLat.text = @"-44";
+    self.minutesLat.text = @"42";
+    self.secondsLat.text = @"0";
+
+    self.degreesLong.text = @"169";
+    self.minutesLong.text = @"9";
+    self.secondsLong.text = @"0";
 }
 
 #pragma mark MKMapViewDelegate
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
-    if (!self.firstLoad) {
-        self.firstLoad = YES;
-        return;
-    }
-    if (!self.didZoom) {
-        MKCoordinateRegion region = self.mapView.region;
-        region.span = MKCoordinateSpanMake(0.5, 0.5);
-        [self.mapView setRegion:region animated:YES];
-        self.didZoom = YES;
-    }
 }
 
 #pragma mark UITextFieldDelegate
