@@ -59,7 +59,7 @@
 - (void)testFromDegrees
 {
     // known location
-    // Oakland, California (37º 46' 18" N, 122 13.4' 24" W) [37.77166667 -122.223333]
+    // Oakland, California (37º 46.3' 18" N, 122 13.4' 24" W) [37.77166667 -122.223333]
     CLLocationDegrees latitude = 37.77166667;
     CLLocationDegrees longitude = -122.223333;
     FESCLLocationCoordinate2D latitudeFES = [CLLocation fes_coordinateForDecimalDegrees:latitude];

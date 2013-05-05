@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		374DA31E1735C734007D1093 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 374DA31D1735C734007D1093 /* MapKit.framework */; };
 		37988E471734E10E0021AEC5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37988E461734E10E0021AEC5 /* UIKit.framework */; };
 		37988E491734E10E0021AEC5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37988E481734E10E0021AEC5 /* Foundation.framework */; };
 		37988E4B1734E10E0021AEC5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37988E4A1734E10E0021AEC5 /* CoreGraphics.framework */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		374DA31D1735C734007D1093 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		37988E431734E10E0021AEC5 /* CoordinatesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoordinatesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37988E461734E10E0021AEC5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37988E481734E10E0021AEC5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				374DA31E1735C734007D1093 /* MapKit.framework in Frameworks */,
 				37988E881734E2090021AEC5 /* CoreLocation.framework in Frameworks */,
 				37988E471734E10E0021AEC5 /* UIKit.framework in Frameworks */,
 				37988E491734E10E0021AEC5 /* Foundation.framework in Frameworks */,
@@ -97,6 +100,7 @@
 		37988E3A1734E10E0021AEC5 = {
 			isa = PBXGroup;
 			children = (
+				374DA31D1735C734007D1093 /* MapKit.framework */,
 				37988E871734E2090021AEC5 /* CoreLocation.framework */,
 				37988E841734E1710021AEC5 /* CLLocation+FESCoordinates.h */,
 				37988E851734E1710021AEC5 /* CLLocation+FESCoordinates.m */,

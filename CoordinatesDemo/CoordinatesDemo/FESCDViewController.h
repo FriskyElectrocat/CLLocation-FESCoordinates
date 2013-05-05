@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
-@interface FESCDViewController : UIViewController
+@interface FESCDViewController : UIViewController <UITextFieldDelegate, MKMapViewDelegate>
 
 @end
