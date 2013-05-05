@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 @property (weak, nonatomic) IBOutlet UILabel *coordinatesLabel;
 @property (nonatomic, readwrite) BOOL didZoom;
+@property (nonatomic, readwrite) BOOL firstLoad;
 
 @end
 
@@ -34,6 +35,7 @@
     self.coordinatesLabel.text = @"";
     self.coordinatesLabel.hidden = NO;
     self.didZoom = NO;
+    self.firstLoad = NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,6 +79,10 @@
 
 - (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
 {
+    if (!self.firstLoad) {
+        self.firstLoad = YES;
+        return;
+    }
     if (!self.didZoom) {
         MKCoordinateRegion region = self.mapView.region;
         region.span = MKCoordinateSpanMake(0.5, 0.5);
