@@ -66,6 +66,10 @@
                                                                         (FESCLLocationSeconds)[longSeconds doubleValue]);
     CLLocation *location = [CLLocation fes_initWithLatitude:latitude andLongitude:longitude];
 
+    self.coordinatesLabel.text = [NSString stringWithFormat:@"Latitude: %f Longitude: %f",
+                                  location.coordinate.latitude,
+                                  location.coordinate.longitude];
+    
     [self.mapView setCenterCoordinate:location.coordinate animated:YES];
 }
 
