@@ -23,11 +23,11 @@ With this category, you can:
 
 `FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);`
 
-Creates a `FESCLLocationCoordinate2D` struct from separate degrees, minutes, and seconds components.
+Creates an `FESCLLocationCoordinate2D` struct from separate degrees, minutes, and seconds components.
 
 `FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes);`
 
-Creates a `FESCLLocationMinDecCoordinate` struct from two components: degrees and minutes.
+Creates an `FESCLLocationMinDecCoordinate` struct from two components: degrees and minutes.
 
 `+ (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
                         andLongitude:(FESCLLocationCoordinate2D)longitude;`
@@ -38,13 +38,17 @@ Create a `CLLocation` object from two `FESCLLocationCoordinate2D` structs each r
 
 Convert an `FESCLLocationCoordinate2D` struct representing a coordinate in degrees, minutes, and seconds to decimal degrees.
 
+`+ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationCoordinateMinDec)coordinate;`
+
+Convert an `FESCLLocationCoordinateMinDec` struct representing a MinDec coordinate in degrees and minutes to decimal degrees.
+
 `+ (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;`
 
-Convert an `CLLocationDegrees` value representing decimal degrees to a `FESCLLocationCoordinate2D` struct representing a coordinate in degrees, minutes, and seconds.
+Convert a `CLLocationDegrees` value representing decimal degrees to an `FESCLLocationCoordinate2D` struct representing a coordinate in degrees, minutes, and seconds.
 
-`+ (FESCLLocationMinDecCoordinate)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;`
+`+ (FESCLLocationCoordinateMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;`
 
-Convert a `CLLocationDegrees` value representing decimal degrees to a `FESCLLocationMinDecCoordinate` struct representing a MinDec coordinate in degree and minutes.
+Convert a `CLLocationDegrees` value representing decimal degrees to an `FESCLLocationCoordinateMinDec` struct representing a MinDec coordinate in degrees and minutes.
 
 ## License
 
