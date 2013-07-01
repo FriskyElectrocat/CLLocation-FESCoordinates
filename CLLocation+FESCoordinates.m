@@ -24,6 +24,10 @@
 
 #import "CLLocation+FESCoordinates.h"
 
+double FESMinutesInDegreeConstant = 60.0;
+double FESSecondsInMinuteConstant = 60.0;
+double FESSecondsInDegreeConstant = 3600.0;
+
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds)
 {
     FESCLLocationCoordinate2D retValue;
@@ -60,8 +64,8 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
         degreesSign = -1;
     }
     CLLocationDegrees retDegrees = coordinate.degrees;
-    retDegrees += degreesSign * (coordinate.minutes / 60.0);
-    retDegrees += degreesSign * (coordinate.seconds / 3600.0);
+    retDegrees += degreesSign * (coordinate.minutes / FESMinutesInDegreeConstant);
+    retDegrees += degreesSign * (coordinate.seconds / FESSecondsInDegreeConstant);
     return retDegrees;
 }
 
@@ -72,21 +76,21 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
         degreesSign = -1;
     }
     CLLocationDegrees retDegrees = coordinate.degrees;
-    retDegrees += degreesSign * (coordinate.minutes / 60.0);
+    retDegrees += degreesSign * (coordinate.minutes / FESMinutesInDegreeConstant);
     return retDegrees;
 }
 
 + (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees_
 {
 
-    double seconds = round(fabs(degrees_ * 3600));
-    double degrees = floor(seconds / 3600.0);
+    double seconds = round(fabs(degrees_ * FESSecondsInDegreeConstant));
+    double degrees = floor(seconds / FESSecondsInDegreeConstant);
     if (degrees_ < 0.0) {
         degrees *= -1.0;
     }
-    seconds = fmod(seconds, 3600.0);
-    double minutes = seconds / 60.0;
-    seconds = fmod(seconds, 60.0);
+    seconds = fmod(seconds, FESSecondsInDegreeConstant);
+    double minutes = seconds / FESSecondsInMinuteConstant;
+    seconds = fmod(seconds, FESMinutesInDegreeConstant);
 
     return FESCLLocationCoordinate2DMake((FESCLLocationDegrees)degrees,
                                          (FESCLLocationMinutes)minutes,
@@ -105,7 +109,7 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
     }
     
     // now for minutes
-    double minutes = (fabs(degrees_) - fabs(degrees)) * 60;
+    double minutes = (fabs(degrees_) - fabs(degrees)) * FESMinutesInDegreeConstant;
     
     // and let's return our MinDec represtation.
     return FESCLLocationCoordinateMinDecMake((FESCLLocationDegrees)degrees,

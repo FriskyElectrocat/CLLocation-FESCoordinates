@@ -29,6 +29,10 @@ typedef double FESCLLocationDegrees;
 typedef double FESCLLocationMinutes;
 typedef double FESCLLocationSeconds;
 
+extern double FESMinutesInDegreeConstant;
+extern double FESSecondsInMinuteConstant;
+extern double FESSecondsInDegreeConstant;
+
 typedef struct {
 	FESCLLocationDegrees degrees;
     FESCLLocationMinutes minutes;
