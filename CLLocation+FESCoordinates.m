@@ -83,4 +83,24 @@ FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDeg
                                          (FESCLLocationSeconds)seconds);
 }
 
++ (FESCLLocationMinDecCoordinate)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees_
+{
+    // Let's get the whole number value for the degrees
+    double degrees = floor(fabs(degrees_));
+
+    // if it's south or west, the degrees will be negative.  Let's check and make
+    // sure we've got the degrees signed correctly.
+    if (degrees_ < 0.0) {
+        degrees *= -1.0;
+    }
+    
+    // now for minutes
+    double minutes = (degrees_ - floor(degrees_)) * 60;
+    
+    // and let's return our MinDec represtation.
+    return FESCLLocationMinDecCoordinateMake((FESCLLocationDegrees)degrees,
+                                             (FESCLLocationMinutes)minutes);
+}
+
+
 @end
