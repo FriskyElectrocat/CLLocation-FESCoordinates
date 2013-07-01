@@ -32,7 +32,26 @@
     CLLocation *knownLocation = [[CLLocation alloc] initWithLatitude:37.771667 longitude:-122.223333];
     FESCLLocationCoordinate2D latitude = FESCLLocationCoordinate2DMake(37, 46.3, 0);
     FESCLLocationCoordinate2D longitude = FESCLLocationCoordinate2DMake(-122, 13.4, 0);
-    CLLocation *newLocation = [CLLocation fes_initWithLatitude:latitude andLongitude:longitude];
+    CLLocation *newLocation = [CLLocation fes_initFromDMSWithLatitude:latitude andLongitude:longitude];
+
+    STAssertEqualsWithAccuracy(knownLocation.coordinate.latitude,
+                               newLocation.coordinate.latitude,
+                               0.000001,
+                               @"Known CLLocation and generated CLLocation latitude do not match");
+    STAssertEqualsWithAccuracy(knownLocation.coordinate.longitude,
+                               newLocation.coordinate.longitude,
+                               0.000001,
+                               @"Known CLLocation and generated CLLocation longitude do not match");
+}
+
+- (void)testCreateLocationWithCoordinatesMinDec
+{
+    // known location
+    // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
+    CLLocation *knownLocation = [[CLLocation alloc] initWithLatitude:37.771667 longitude:-122.223333];
+    FESCLLocationCoordinateMinDec latitude = FESCLLocationCoordinateMinDecMake(37, 46.30002);
+    FESCLLocationCoordinateMinDec longitude = FESCLLocationCoordinateMinDecMake(-122, 13.39998);
+    CLLocation *newLocation = [CLLocation fes_initFromMinDecWithLatitude:latitude andLongitude:longitude];
 
     STAssertEqualsWithAccuracy(knownLocation.coordinate.latitude,
                                newLocation.coordinate.latitude,

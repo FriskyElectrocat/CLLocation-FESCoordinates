@@ -53,8 +53,11 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
 
 @interface CLLocation (FESCoordinates)
 
-+ (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
-                        andLongitude:(FESCLLocationCoordinate2D)longitude;
++ (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
+                               andLongitude:(FESCLLocationCoordinate2D)longitude;
+
++ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationCoordinateMinDec)latitude
+                                  andLongitude:(FESCLLocationCoordinateMinDec)longitude;
 
 + (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate;
 

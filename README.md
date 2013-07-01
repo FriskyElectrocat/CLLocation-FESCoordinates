@@ -29,10 +29,15 @@ Creates an `FESCLLocationCoordinate2D` struct from separate degrees, minutes, an
 
 Creates an `FESCLLocationMinDecCoordinate` struct from two components: degrees and minutes.
 
-`+ (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
-                        andLongitude:(FESCLLocationCoordinate2D)longitude;`
+`+ (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
+                                andLongitude:(FESCLLocationCoordinate2D)longitude;`
 
 Create a `CLLocation` object from two `FESCLLocationCoordinate2D` structs each representing a coordinate in degrees, minutes, and seconds.
+
+`+ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationCoordinate2D)latitude
+                                   andLongitude:(FESCLLocationCoordinate2D)longitude;`
+
+Create a `CLLocation` object from two `FESCLLocationCoordinateMinDec` structs each representing a MinDec coordinate in degrees and minutes.
 
 `+ (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate;`
 

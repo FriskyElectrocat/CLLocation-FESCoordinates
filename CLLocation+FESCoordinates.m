@@ -48,11 +48,20 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
 
 @implementation CLLocation (FESCoordinates)
 
-+ (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
-                        andLongitude:(FESCLLocationCoordinate2D)longitude
++ (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
+                               andLongitude:(FESCLLocationCoordinate2D)longitude
 {
     CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinate:latitude];
     CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinate:longitude];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:latitudeDeg longitude:longitudeDeg];
+    return location;
+}
+
++ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationCoordinateMinDec)latitude
+                                  andLongitude:(FESCLLocationCoordinateMinDec)longitude
+{
+    CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:latitude];
+    CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:longitude];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitudeDeg longitude:longitudeDeg];
     return location;
 }
