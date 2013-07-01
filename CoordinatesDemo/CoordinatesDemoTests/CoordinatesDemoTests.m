@@ -84,7 +84,6 @@
     STAssertEqualsWithAccuracy(latCoords.minutes, 46.30002, 0.000001, @"known minutes does not match calculated");
     STAssertEquals(longCoords.degrees, -122.0, @"known degrees does not match calculated");
     STAssertEqualsWithAccuracy(longCoords.minutes, 13.39998, 0.000001, @"known minutes does not match calculated");
-
 }
 
 @end

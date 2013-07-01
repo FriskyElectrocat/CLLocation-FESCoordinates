@@ -95,7 +95,7 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
     }
     
     // now for minutes
-    double minutes = (degrees_ - floor(degrees_)) * 60;
+    double minutes = (fabs(degrees_) - fabs(degrees)) * 60;
     
     // and let's return our MinDec represtation.
     return FESCLLocationCoordinateMinDecMake((FESCLLocationDegrees)degrees,
