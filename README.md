@@ -40,7 +40,7 @@ Convert an `FESCLLocationCoordinate2D` struct representing a coordinate in degre
 
 `+ (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;`
 
-Convert a `CLLocationDegrees` value representing decimal degrees to a `FESCLLocationCoordinate2D` struct representing a coordinate in degrees, minutes, and seconds.
+Convert an `CLLocationDegrees` value representing decimal degrees to a `FESCLLocationCoordinate2D` struct representing a coordinate in degrees, minutes, and seconds.
 
 `+ (FESCLLocationMinDecCoordinate)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;`
 
