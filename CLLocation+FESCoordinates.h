@@ -54,6 +54,8 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
 
 + (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate;
 
++ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationCoordinateMinDec)coordinate;
+
 + (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;
 
 + (FESCLLocationCoordinateMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;

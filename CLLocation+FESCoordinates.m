@@ -55,14 +55,24 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
 
 + (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate
 {
-
-    NSInteger latitudeSign = 1;
+    NSInteger degreesSign = 1;
     if (coordinate.degrees < 0.0){
-        latitudeSign = -1;
+        degreesSign = -1;
     }
     CLLocationDegrees retDegrees = coordinate.degrees;
-    retDegrees += latitudeSign * (coordinate.minutes / 60.0);
-    retDegrees += latitudeSign * (coordinate.seconds / 3600.0);
+    retDegrees += degreesSign * (coordinate.minutes / 60.0);
+    retDegrees += degreesSign * (coordinate.seconds / 3600.0);
+    return retDegrees;
+}
+
++ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationCoordinateMinDec)coordinate
+{
+    NSInteger degreesSign = 1;
+    if (coordinate.degrees < 0.0){
+        degreesSign = -1;
+    }
+    CLLocationDegrees retDegrees = coordinate.degrees;
+    retDegrees += degreesSign * (coordinate.minutes / 60.0);
     return retDegrees;
 }
 

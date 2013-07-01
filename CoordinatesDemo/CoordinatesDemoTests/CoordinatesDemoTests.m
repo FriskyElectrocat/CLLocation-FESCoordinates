@@ -25,7 +25,7 @@
     [super tearDown];
 }
 
-- (void)testCreateLocation
+- (void)testCreateLocationWithCoordinatesDMS
 {
     // known location
     // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
@@ -44,7 +44,7 @@
                                @"Known CLLocation and generated CLLocation longitude do not match");
 }
 
-- (void)testToDegrees
+- (void)testToDecimalDegreesFromCoordinateDMS
 {
     // known location
     // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
@@ -56,7 +56,7 @@
     STAssertEqualsWithAccuracy(longitudeDeg, -122.223333, 0.000001, @"known longitude and calculated longitude do not match");
 }
 
-- (void)testFromDegrees
+- (void)testFromDecimalDegreesToCoordinateDMS
 {
     // known location
     // Oakland, California (37º 46.3' 18" N, 122 13.4' 24" W) [37.77166667 -122.223333]
@@ -72,14 +72,24 @@
     STAssertEquals(longitudeFES.seconds, 24.0, @"known seconds does not match calculated");
 }
 
-- (void)testFromDegreesToMinDec
+- (void)testToDecimalDegreesFromMinDec
+{
+    FESCLLocationCoordinateMinDec latitude = FESCLLocationCoordinateMinDecMake(37.0, 46.30002);
+    FESCLLocationCoordinateMinDec longitude = FESCLLocationCoordinateMinDecMake(-122, 13.39998);
+    CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:latitude];
+    STAssertEqualsWithAccuracy(latitudeDeg, 37.771667, 0.000001, @"known latitude and calculated latitude do not match");
+    CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:longitude];
+    STAssertEqualsWithAccuracy(longitudeDeg, -122.223333, 0.000001, @"known longitude and calculated longitude do not match");
+}
+
+- (void)testFromDecimalDegreesToMinDec
 {
     // known location
     // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
-    CLLocationDegrees lat = 37.771667;
-    CLLocationDegrees long_ = -122.223333;
-    FESCLLocationCoordinateMinDec latCoords = [CLLocation fes_minDecForDecimalDegrees:lat];
-    FESCLLocationCoordinateMinDec longCoords = [CLLocation fes_minDecForDecimalDegrees:long_];
+    CLLocationDegrees latitude = 37.771667;
+    CLLocationDegrees longitude = -122.223333;
+    FESCLLocationCoordinateMinDec latCoords = [CLLocation fes_minDecForDecimalDegrees:latitude];
+    FESCLLocationCoordinateMinDec longCoords = [CLLocation fes_minDecForDecimalDegrees:longitude];
     STAssertEquals(latCoords.degrees, 37.0, @"known degrees does not match calculated");
     STAssertEqualsWithAccuracy(latCoords.minutes, 46.30002, 0.000001, @"known minutes does not match calculated");
     STAssertEquals(longCoords.degrees, -122.0, @"known degrees does not match calculated");
