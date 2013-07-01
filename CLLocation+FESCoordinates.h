@@ -39,12 +39,12 @@ typedef struct {
 typedef struct {
     FESCLLocationDegrees degrees;
     FESCLLocationMinutes minutes;
-} FESCLLocationMinDecCoordinate;
+} FESCLLocationCoordinateMinDec;
 
 // a convenience funciton to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
 
-FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDegrees degrees,
+FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDegrees degrees,
                                                                 FESCLLocationMinutes minutes);
 
 @interface CLLocation (FESCoordinates)
@@ -56,6 +56,6 @@ FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDeg
 
 + (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;
 
-+ (FESCLLocationMinDecCoordinate)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;
++ (FESCLLocationCoordinateMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;
 
 @end

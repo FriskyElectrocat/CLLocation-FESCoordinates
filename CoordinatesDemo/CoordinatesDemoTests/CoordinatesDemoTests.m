@@ -78,8 +78,8 @@
     // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
     CLLocationDegrees lat = 37.771667;
     CLLocationDegrees long_ = -122.223333;
-    FESCLLocationMinDecCoordinate latCoords = [CLLocation fes_minDecForDecimalDegrees:lat];
-    FESCLLocationMinDecCoordinate longCoords = [CLLocation fes_minDecForDecimalDegrees:long_];
+    FESCLLocationCoordinateMinDec latCoords = [CLLocation fes_minDecForDecimalDegrees:lat];
+    FESCLLocationCoordinateMinDec longCoords = [CLLocation fes_minDecForDecimalDegrees:long_];
     STAssertEquals(latCoords.degrees, 37.0, @"known degrees does not match calculated");
     STAssertEqualsWithAccuracy(latCoords.minutes, 46.30002, 0.000001, @"known minutes does not match calculated");
     STAssertEquals(longCoords.degrees, -122.0, @"known degrees does not match calculated");

@@ -33,10 +33,10 @@ FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees deg
     return retValue;
 }
 
-FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDegrees degrees,
+FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDegrees degrees,
                                                                 FESCLLocationMinutes minutes)
 {
-    FESCLLocationMinDecCoordinate retValue;
+    FESCLLocationCoordinateMinDec retValue;
     retValue.degrees = degrees;
     retValue.minutes = minutes;
     return retValue;
@@ -83,7 +83,7 @@ FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDeg
                                          (FESCLLocationSeconds)seconds);
 }
 
-+ (FESCLLocationMinDecCoordinate)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees_
++ (FESCLLocationCoordinateMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees_
 {
     // Let's get the whole number value for the degrees
     double degrees = floor(fabs(degrees_));
@@ -98,7 +98,7 @@ FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDeg
     double minutes = (degrees_ - floor(degrees_)) * 60;
     
     // and let's return our MinDec represtation.
-    return FESCLLocationMinDecCoordinateMake((FESCLLocationDegrees)degrees,
+    return FESCLLocationCoordinateMinDecMake((FESCLLocationDegrees)degrees,
                                              (FESCLLocationMinutes)minutes);
 }
 
