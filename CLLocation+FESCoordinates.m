@@ -33,6 +33,15 @@ FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees deg
     return retValue;
 }
 
+FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDegrees degrees,
+                                                                FESCLLocationMinutes minutes)
+{
+    FESCLLocationMinDecCoordinate retValue;
+    retValue.degrees = degrees;
+    retValue.minutes = minutes;
+    return retValue;
+}
+
 @implementation CLLocation (FESCoordinates)
 
 + (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude

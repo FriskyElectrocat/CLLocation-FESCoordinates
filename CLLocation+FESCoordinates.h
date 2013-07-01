@@ -35,8 +35,17 @@ typedef struct {
     FESCLLocationSeconds seconds;
 } FESCLLocationCoordinate2D;
 
+// MinDec Handling
+typedef struct {
+    FESCLLocationDegrees degrees;
+    FESCLLocationMinutes minutes;
+} FESCLLocationMinDecCoordinate;
+
 // a convenience funciton to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
+
+FESCLLocationMinDecCoordinate FESCLLocationMinDecCoordinateMake(FESCLLocationDegrees degrees,
+                                                                FESCLLocationMinutes minutes);
 
 @interface CLLocation (FESCoordinates)
 
