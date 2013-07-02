@@ -66,7 +66,7 @@
     FESCLLocationCoordinate2D longitude = FESCLLocationCoordinate2DMake((FESCLLocationDegrees)[longDegrees doubleValue],
                                                                         (FESCLLocationMinutes)[longMinutes doubleValue],
                                                                         (FESCLLocationSeconds)[longSeconds doubleValue]);
-    CLLocation *location = [CLLocation fes_initWithLatitude:latitude andLongitude:longitude];
+    CLLocation *location = [CLLocation fes_initFromDMSWithLatitude:latitude andLongitude:longitude];
 
     self.coordinatesLabel.text = [NSString stringWithFormat:@"Latitude: %f Longitude: %f",
                                   location.coordinate.latitude,
