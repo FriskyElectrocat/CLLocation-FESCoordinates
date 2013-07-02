@@ -37,17 +37,17 @@ FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees deg
     return retValue;
 }
 
-FESCLLocationDegreeMinDec FESCLLocationDegreeMinDecMake(FESCLLocationDegrees degrees,
+FESCLLocationDegreesMinDec FESCLLocationDegreesMinDecMake(FESCLLocationDegrees degrees,
                                                                 FESCLLocationMinutes minutes)
 {
-    FESCLLocationDegreeMinDec retValue;
+    FESCLLocationDegreesMinDec retValue;
     retValue.degrees = degrees;
     retValue.minutes = minutes;
     return retValue;
 }
 
-FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreeMinDec latitude,
-                                                FESCLLocationDegreeMinDec longitude)
+FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latitude,
+                                                FESCLLocationDegreesMinDec longitude)
 {
     FESCLLocationMinDec2D retValue;
     retValue.latitude = latitude;
@@ -66,8 +66,8 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreeMinDec latitu
     return location;
 }
 
-+ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationDegreeMinDec)latitude
-                                  andLongitude:(FESCLLocationDegreeMinDec)longitude
++ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationDegreesMinDec)latitude
+                                  andLongitude:(FESCLLocationDegreesMinDec)longitude
 {
     CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:latitude];
     CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:longitude];
@@ -87,7 +87,7 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreeMinDec latitu
     return retDegrees;
 }
 
-+ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationDegreeMinDec)coordinate
++ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationDegreesMinDec)coordinate
 {
     NSInteger degreesSign = 1;
     if (coordinate.degrees < 0.0){
@@ -115,7 +115,7 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreeMinDec latitu
                                          (FESCLLocationSeconds)seconds);
 }
 
-+ (FESCLLocationDegreeMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees_
++ (FESCLLocationDegreesMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees_
 {
     // Let's get the whole number value for the degrees
     double degrees = floor(fabs(degrees_));
@@ -130,15 +130,15 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreeMinDec latitu
     double minutes = (fabs(degrees_) - fabs(degrees)) * FESMinutesInDegreeConstant;
     
     // and let's return our MinDec represtation.
-    return FESCLLocationDegreeMinDecMake((FESCLLocationDegrees)degrees,
+    return FESCLLocationDegreesMinDecMake((FESCLLocationDegrees)degrees,
                                              (FESCLLocationMinutes)minutes);
 }
 
 + (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate
 {
     
-    FESCLLocationDegreeMinDec latitude;
-    FESCLLocationDegreeMinDec longitude;
+    FESCLLocationDegreesMinDec latitude;
+    FESCLLocationDegreesMinDec longitude;
     
     latitude = [CLLocation fes_minDecForDecimalDegrees:coordinate.latitude];
     longitude = [CLLocation fes_minDecForDecimalDegrees:coordinate.longitude];

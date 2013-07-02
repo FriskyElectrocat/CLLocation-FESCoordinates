@@ -49,8 +49,8 @@
     // known location
     // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
     CLLocation *knownLocation = [[CLLocation alloc] initWithLatitude:37.771667 longitude:-122.223333];
-    FESCLLocationDegreeMinDec latitude = FESCLLocationDegreeMinDecMake(37, 46.30002);
-    FESCLLocationDegreeMinDec longitude = FESCLLocationDegreeMinDecMake(-122, 13.39998);
+    FESCLLocationDegreesMinDec latitude = FESCLLocationDegreesMinDecMake(37, 46.30002);
+    FESCLLocationDegreesMinDec longitude = FESCLLocationDegreesMinDecMake(-122, 13.39998);
     CLLocation *newLocation = [CLLocation fes_initFromMinDecWithLatitude:latitude andLongitude:longitude];
 
     STAssertEqualsWithAccuracy(knownLocation.coordinate.latitude,
@@ -93,8 +93,8 @@
 
 - (void)testToDecimalDegreesFromMinDec
 {
-    FESCLLocationDegreeMinDec latitude = FESCLLocationDegreeMinDecMake(37.0, 46.30002);
-    FESCLLocationDegreeMinDec longitude = FESCLLocationDegreeMinDecMake(-122, 13.39998);
+    FESCLLocationDegreesMinDec latitude = FESCLLocationDegreesMinDecMake(37.0, 46.30002);
+    FESCLLocationDegreesMinDec longitude = FESCLLocationDegreesMinDecMake(-122, 13.39998);
     CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:latitude];
     STAssertEqualsWithAccuracy(latitudeDeg, 37.771667, 0.000001, @"known latitude and calculated latitude do not match");
     CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:longitude];
@@ -107,8 +107,8 @@
     // Oakland, California (37 46.3' N, 122 13.4' W) [37.771667 -122.223333]
     CLLocationDegrees latitude = 37.771667;
     CLLocationDegrees longitude = -122.223333;
-    FESCLLocationDegreeMinDec latCoords = [CLLocation fes_minDecForDecimalDegrees:latitude];
-    FESCLLocationDegreeMinDec longCoords = [CLLocation fes_minDecForDecimalDegrees:longitude];
+    FESCLLocationDegreesMinDec latCoords = [CLLocation fes_minDecForDecimalDegrees:latitude];
+    FESCLLocationDegreesMinDec longCoords = [CLLocation fes_minDecForDecimalDegrees:longitude];
     STAssertEquals(latCoords.degrees, 37.0, @"known degrees does not match calculated");
     STAssertEqualsWithAccuracy(latCoords.minutes, 46.30002, 0.000001, @"known minutes does not match calculated");
     STAssertEquals(longCoords.degrees, -122.0, @"known degrees does not match calculated");
