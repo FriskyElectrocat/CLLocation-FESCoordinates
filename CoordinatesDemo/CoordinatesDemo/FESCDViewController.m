@@ -60,13 +60,15 @@
     NSNumber *longMinutes = [f numberFromString:self.minutesLong.text];
     NSNumber *longSeconds = [f numberFromString:self.secondsLong.text];
 
-    FESCLLocationCoordinate2D latitude = FESCLLocationCoordinate2DMake((FESCLLocationDegrees)[latDegrees doubleValue],
+    FESCLLocationDegreesMinutesSeconds latitude = FESCLLocationDegreesMinutesSecondsMake((FESCLLocationDegrees)[latDegrees doubleValue],
                                                                        (FESCLLocationMinutes)[latMinutes doubleValue],
                                                                        (FESCLLocationSeconds)[latSeconds doubleValue]);
-    FESCLLocationCoordinate2D longitude = FESCLLocationCoordinate2DMake((FESCLLocationDegrees)[longDegrees doubleValue],
+    FESCLLocationDegreesMinutesSeconds longitude = FESCLLocationDegreesMinutesSecondsMake((FESCLLocationDegrees)[longDegrees doubleValue],
                                                                         (FESCLLocationMinutes)[longMinutes doubleValue],
                                                                         (FESCLLocationSeconds)[longSeconds doubleValue]);
-    CLLocation *location = [CLLocation fes_initFromDMSWithLatitude:latitude andLongitude:longitude];
+    FESCLLocationDegreesMinutesSeconds2D coordinate = FESCLLocationDegreesMinutesSeconds2DMake(latitude, longitude);
+    
+    CLLocation *location = [CLLocation fes_initFromDegreesMinutesSeconds2D:coordinate];
 
     self.coordinatesLabel.text = [NSString stringWithFormat:@"Latitude: %f Longitude: %f",
                                   location.coordinate.latitude,
