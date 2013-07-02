@@ -168,7 +168,7 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
 
     // convert the components of an FESCLLocationDegreesMinutesSeconds to NSNumbers
     // so that they can be used by the NSNumber Formatter.
-    NSNumber *nDegrees = @(degrees_.degrees);
+    NSNumber *nDegrees = @(fabs(degrees_.degrees));
     NSNumber *nMinutes = @(degrees_.minutes);
     NSNumber *nSeconds = @(degrees_.seconds);
 
@@ -184,15 +184,15 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     // whether it's a postive or negative value.
     if (axis == FESAxisLatitude) {
         if (degrees_.degrees < 0.0) {
-            direction = @"W";
-        } else {
-            direction = @"E";
-        }
-    } else {  // FESAxisLongitude
-        if (degrees_.degrees < 0.0) {
             direction = @"S";
         } else {
             direction = @"N";
+        }
+    } else {  // FESAxisLongitude
+        if (degrees_.degrees < 0.0) {
+            direction = @"W";
+        } else {
+            direction = @"E";
         }
     }
 
@@ -207,8 +207,8 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
  
     // convert the components of an FESCLLocationDegreesMinDec to NSNumbers
     // so that they can be used by the NSNumber Formatter.
-    NSNumber *nDegrees = [NSNumber numberWithDouble:degrees_.degrees];
-    NSNumber *nMinutes = [NSNumber numberWithDouble:degrees_.minutes];
+    NSNumber *nDegrees = @(fabs(degrees_.degrees));
+    NSNumber *nMinutes = @(degrees_.minutes);
     
     // Set up the formatter with the appropriate output format and convert
     // our NSNumbers. format would look something like this: 123.4567
@@ -221,15 +221,15 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     // whether it's a postive or negative value.
     if (axis == FESAxisLatitude) {
         if (degrees_.degrees < 0.0) {
-            direction = @"W";
-        } else {
-            direction = @"E";
-        }
-    } else {  // FESAxisLongitude
-        if (degrees_.degrees < 0.0) {
             direction = @"S";
         } else {
             direction = @"N";
+        }
+    } else {  // FESAxisLongitude
+        if (degrees_.degrees < 0.0) {
+            direction = @"W";
+        } else {
+            direction = @"E";
         }
     }
     

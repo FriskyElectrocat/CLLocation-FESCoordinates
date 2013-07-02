@@ -105,6 +105,18 @@
     STAssertEquals(location.longitude.seconds, 24.0, @"known seconds does not match calculated");
 }
 
+- (void)testFormattedStringForDMS
+{
+    CLLocationDegrees latitude = 37.77166667;
+    CLLocationDegrees longitude = -122.223333;
+    FESCLLocationDegreesMinutesSeconds latCoords = [CLLocation fes_degreesMinutesSecondsForDecimalDegrees:latitude];
+    FESCLLocationDegreesMinutesSeconds longCoords = [CLLocation fes_degreesMinutesSecondsForDecimalDegrees:longitude];
+    NSString *latString = [CLLocation fes_formattedStringForDegreesMinutesSeconds:latCoords withAxis:FESAxisLatitude];
+    NSString *longString = [CLLocation fes_formattedStringForDegreesMinutesSeconds:longCoords withAxis:FESAxisLongitude];
+    STAssertEqualObjects(latString, @"37° 46.3′ 18″ N", @"known formatted string for latitude does not match output.");
+    STAssertEqualObjects(longString, @"122° 13.4′ 24″ W", @"known formatted string for longitude does not match output.");
+
+}
 - (void)testToDecimalDegreesFromMinDec
 {
     FESCLLocationDegreesMinDec latitude = FESCLLocationDegreesMinDecMake(37.0, 46.30002);
@@ -149,9 +161,8 @@
     FESCLLocationDegreesMinDec longCoords = [CLLocation fes_degreesMinDecForDecimalDegrees:longitude];
     NSString *latString = [CLLocation fes_formattedStringForMinDecDegree:latCoords withAxis:FESAxisLatitude];
     NSString *longString = [CLLocation fes_formattedStringForMinDecDegree:longCoords withAxis:FESAxisLongitude];
-    STAssertEqualObjects(latString, @"36°58.6101 E", @"known formatted string for latitude does not match output.");
-    STAssertEqualObjects(longString, @"-122°1.9568 S", @"known formatted string for longitude does not match output.");
-
+    STAssertEqualObjects(latString, @"36°58.6101 N", @"known formatted string for latitude does not match output.");
+    STAssertEqualObjects(longString, @"122°1.9568 W", @"known formatted string for longitude does not match output.");
 }
 
 @end
