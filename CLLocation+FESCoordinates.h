@@ -36,8 +36,8 @@ extern double FESSecondsInDegreeConstant;
 
 // for specifying the axis that a degree is found on.
 typedef enum {
-    kLatitude,
-    kLongitude
+    FESAxisLatitude,
+    FESAxisLongitude
 } FESAxis;
 
 typedef struct {
