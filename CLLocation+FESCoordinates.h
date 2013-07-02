@@ -33,6 +33,12 @@ extern double FESMinutesInDegreeConstant;
 extern double FESSecondsInMinuteConstant;
 extern double FESSecondsInDegreeConstant;
 
+// for specifying the axis that a degree is found on.
+typedef enum {
+    kLatitude,
+    kLongitude
+} FESAxis;
+
 typedef struct {
 	FESCLLocationDegrees degrees;
     FESCLLocationMinutes minutes;
@@ -79,6 +85,8 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
 
 + (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate;
 
+// return a string representing the written notation for a MinDec Coordinate Degree.
++ (NSString *)fes_formattedStringForMinDecDegree:(FESCLLocationDegreesMinDec)degrees withAxis:(FESAxis)axis;
 
 
 @end

@@ -147,4 +147,41 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     return FESCLLocationMinDec2DMake(latitude, longitude);
 }
 
++ (NSString *)fes_formattedStringForMinDecDegree:(FESCLLocationDegreesMinDec)degrees_ withAxis:(FESAxis)axis
+{
+
+    NSString *direction = nil;
+ 
+    // convert the components of an FESCLLocationDegreesMinDec to NSNumbers
+    // so that they can be used by the NSNumber Formatter.
+    NSNumber *nDegrees = [NSNumber numberWithDouble:degrees_.degrees];
+    NSNumber *nMinutes = [NSNumber numberWithDouble:degrees_.minutes];
+    
+    // Set up the formatter with the appropriate output format and convert
+    // our NSNumbers. format would look something like this: 123.4567
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"##0.####"];
+    NSString *degrees = [numberFormatter stringFromNumber:nDegrees];
+    NSString *minutes = [numberFormatter stringFromNumber:nMinutes];
+    
+    // Based upon the access, we need to set the direction string based upon
+    // whether it's a postive or negative value.
+    if (axis == kLatitude) {
+        if (degrees_.degrees < 0.0) {
+            direction = @"W";
+        } else {
+            direction = @"E";
+        }
+    } else {  // kLongitude
+        if (degrees_.degrees < 0.0) {
+            direction = @"S";
+        } else {
+            direction = @"N";
+        }
+    }
+    
+    // now return a formatted string using our converted degrees data.
+    return [NSString stringWithFormat:@"%@°%@ %@", degrees, minutes, direction];
+}
+
 @end

@@ -127,4 +127,17 @@
     STAssertEqualsWithAccuracy(location.longitude.minutes, 1.95684, 0.000001, @"known minutes does not match calculated");
 }
 
+- (void)testFormattedStringForMinDecDegree
+{
+    CLLocationDegrees latitude = 36.976835;
+    CLLocationDegrees longitude = -122.032614;
+    FESCLLocationDegreesMinDec latCoords = [CLLocation fes_minDecForDecimalDegrees:latitude];
+    FESCLLocationDegreesMinDec longCoords = [CLLocation fes_minDecForDecimalDegrees:longitude];
+    NSString *latString = [CLLocation fes_formattedStringForMinDecDegree:latCoords withAxis:kLatitude];
+    NSString *longString = [CLLocation fes_formattedStringForMinDecDegree:longCoords withAxis:kLongitude];
+    STAssertEqualObjects(latString, @"36°58.6101 E", @"known formatted string for latitude does not match output.");
+    STAssertEqualObjects(longString, @"-122°1.9568 S", @"known formatted string for longitude does not match output.");
+
+}
+
 @end
