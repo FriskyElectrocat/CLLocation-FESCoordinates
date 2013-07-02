@@ -115,4 +115,16 @@
     STAssertEqualsWithAccuracy(longCoords.minutes, 13.39998, 0.000001, @"known minutes does not match calculated");
 }
 
+- (void)testFromCoordinateToMinDec2D
+{
+    // known location
+    // The Abbey, Santa Cruz, California (36 58.6' N, 122 2.0' W) [36.976835 -122.032614]
+    CLLocation *knownLocation = [[CLLocation alloc] initWithLatitude:36.976835 longitude:-122.032614];
+    FESCLLocationMinDec2D location = [CLLocation fes_minDec2DForCoordinate:[knownLocation coordinate]];
+    STAssertEquals(location.latitude.degrees, 36.0, @"known latitude degrees does not match calculated");
+    STAssertEqualsWithAccuracy(location.latitude.minutes, 58.6101, 0.000001, @"known minutes does not match calculated");
+    STAssertEquals(location.longitude.degrees, -122.0, @"known degrees does not match calculated");
+    STAssertEqualsWithAccuracy(location.longitude.minutes, 1.95684, 0.000001, @"known minutes does not match calculated");
+}
+
 @end

@@ -39,19 +39,29 @@ typedef struct {
     FESCLLocationSeconds seconds;
 } FESCLLocationCoordinate2D;
 
-// MinDec Handling
+// MinDec Data Type
 typedef struct {
     FESCLLocationDegrees degrees;
     FESCLLocationMinutes minutes;
 } FESCLLocationCoordinateMinDec;
 
+typedef struct {
+    FESCLLocationCoordinateMinDec latitude;
+    FESCLLocationCoordinateMinDec longitude;
+} FESCLLocationMinDec2D;
+
 // a convenience funciton to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
 
+// a convenience funciton to make the FESCLLocationCoordinateMinDec struct
 FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDegrees degrees,
                                                                 FESCLLocationMinutes minutes);
 
+FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationCoordinateMinDec latitude,
+                                                FESCLLocationCoordinateMinDec longitude);
+
 @interface CLLocation (FESCoordinates)
+
 
 + (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
                                andLongitude:(FESCLLocationCoordinate2D)longitude;
@@ -66,5 +76,9 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
 + (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;
 
 + (FESCLLocationCoordinateMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;
+
++ (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate;
+
+
 
 @end

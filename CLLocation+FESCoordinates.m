@@ -46,6 +46,15 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
     return retValue;
 }
 
+FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationCoordinateMinDec latitude,
+                                                FESCLLocationCoordinateMinDec longitude)
+{
+    FESCLLocationMinDec2D retValue;
+    retValue.latitude = latitude;
+    retValue.longitude = longitude;
+    return retValue;
+}
+
 @implementation CLLocation (FESCoordinates)
 
 + (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
@@ -125,5 +134,17 @@ FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDeg
                                              (FESCLLocationMinutes)minutes);
 }
 
++ (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate
+{
+    
+    FESCLLocationCoordinateMinDec latitude;
+    FESCLLocationCoordinateMinDec longitude;
+    
+    latitude = [CLLocation fes_minDecForDecimalDegrees:coordinate.latitude];
+    longitude = [CLLocation fes_minDecForDecimalDegrees:coordinate.longitude];
+        
+    // and let's return our MinDec represtation.
+    return FESCLLocationMinDec2DMake(latitude, longitude);
+}
 
 @end
