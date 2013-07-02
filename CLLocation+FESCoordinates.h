@@ -29,22 +29,64 @@ typedef double FESCLLocationDegrees;
 typedef double FESCLLocationMinutes;
 typedef double FESCLLocationSeconds;
 
+extern double FESMinutesInDegreeConstant;
+extern double FESSecondsInMinuteConstant;
+extern double FESSecondsInDegreeConstant;
+
+// for specifying the axis that a degree is found on.
+typedef enum {
+    kLatitude,
+    kLongitude
+} FESAxis;
+
 typedef struct {
 	FESCLLocationDegrees degrees;
     FESCLLocationMinutes minutes;
     FESCLLocationSeconds seconds;
 } FESCLLocationCoordinate2D;
 
+// MinDec Data Type
+typedef struct {
+    FESCLLocationDegrees degrees;
+    FESCLLocationMinutes minutes;
+} FESCLLocationDegreesMinDec;
+
+typedef struct {
+    FESCLLocationDegreesMinDec latitude;
+    FESCLLocationDegreesMinDec longitude;
+} FESCLLocationMinDec2D;
+
 // a convenience funciton to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
 
+// a convenience funciton to make the FESCLLocationDegreesMinDec struct
+FESCLLocationDegreesMinDec FESCLLocationDegreesMinDecMake(FESCLLocationDegrees degrees,
+                                                                FESCLLocationMinutes minutes);
+
+FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latitude,
+                                                FESCLLocationDegreesMinDec longitude);
+
 @interface CLLocation (FESCoordinates)
 
-+ (CLLocation *)fes_initWithLatitude:(FESCLLocationCoordinate2D)latitude
-                        andLongitude:(FESCLLocationCoordinate2D)longitude;
+
++ (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
+                               andLongitude:(FESCLLocationCoordinate2D)longitude;
+
++ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationDegreesMinDec)latitude
+                                  andLongitude:(FESCLLocationDegreesMinDec)longitude;
 
 + (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate;
 
++ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationDegreesMinDec)coordinate;
+
 + (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;
+
++ (FESCLLocationDegreesMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;
+
++ (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate;
+
+// return a string representing the written notation for a MinDec Coordinate Degree.
++ (NSString *)fes_formattedStringForMinDecDegree:(FESCLLocationDegreesMinDec)degrees withAxis:(FESAxis)axis;
+
 
 @end
