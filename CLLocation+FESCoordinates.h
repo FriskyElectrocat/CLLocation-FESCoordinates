@@ -29,6 +29,7 @@ typedef double FESCLLocationDegrees;
 typedef double FESCLLocationMinutes;
 typedef double FESCLLocationSeconds;
 
+// constants for formulas
 extern double FESMinutesInDegreeConstant;
 extern double FESSecondsInMinuteConstant;
 extern double FESSecondsInDegreeConstant;
