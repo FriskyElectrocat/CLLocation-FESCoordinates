@@ -56,10 +56,10 @@ typedef struct {
     FESCLLocationDegreesMinDec longitude;
 } FESCLLocationMinDec2D;
 
-// a convenience funciton to make the FESCLLocationCoordinate2D struct
+// a convenience function to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
 
-// a convenience funciton to make the FESCLLocationDegreesMinDec struct
+// a convenience function to make the FESCLLocationDegreesMinDec struct
 FESCLLocationDegreesMinDec FESCLLocationDegreesMinDecMake(FESCLLocationDegrees degrees,
                                                                 FESCLLocationMinutes minutes);
 
