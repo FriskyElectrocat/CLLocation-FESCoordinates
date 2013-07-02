@@ -43,22 +43,22 @@ typedef struct {
 typedef struct {
     FESCLLocationDegrees degrees;
     FESCLLocationMinutes minutes;
-} FESCLLocationCoordinateMinDec;
+} FESCLLocationDegreeMinDec;
 
 typedef struct {
-    FESCLLocationCoordinateMinDec latitude;
-    FESCLLocationCoordinateMinDec longitude;
+    FESCLLocationDegreeMinDec latitude;
+    FESCLLocationDegreeMinDec longitude;
 } FESCLLocationMinDec2D;
 
 // a convenience funciton to make the FESCLLocationCoordinate2D struct
 FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds);
 
-// a convenience funciton to make the FESCLLocationCoordinateMinDec struct
-FESCLLocationCoordinateMinDec FESCLLocationCoordinateMinDecMake(FESCLLocationDegrees degrees,
+// a convenience funciton to make the FESCLLocationDegreeMinDec struct
+FESCLLocationDegreeMinDec FESCLLocationDegreeMinDecMake(FESCLLocationDegrees degrees,
                                                                 FESCLLocationMinutes minutes);
 
-FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationCoordinateMinDec latitude,
-                                                FESCLLocationCoordinateMinDec longitude);
+FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreeMinDec latitude,
+                                                FESCLLocationDegreeMinDec longitude);
 
 @interface CLLocation (FESCoordinates)
 
@@ -66,16 +66,16 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationCoordinateMinDec la
 + (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
                                andLongitude:(FESCLLocationCoordinate2D)longitude;
 
-+ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationCoordinateMinDec)latitude
-                                  andLongitude:(FESCLLocationCoordinateMinDec)longitude;
++ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationDegreeMinDec)latitude
+                                  andLongitude:(FESCLLocationDegreeMinDec)longitude;
 
 + (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate;
 
-+ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationCoordinateMinDec)coordinate;
++ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationDegreeMinDec)coordinate;
 
 + (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees;
 
-+ (FESCLLocationCoordinateMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;
++ (FESCLLocationDegreeMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees;
 
 + (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate;
 
