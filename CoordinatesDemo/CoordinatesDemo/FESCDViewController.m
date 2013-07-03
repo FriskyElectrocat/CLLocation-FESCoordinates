@@ -60,13 +60,13 @@
     NSNumber *longMinutes = [f numberFromString:self.minutesLong.text];
     NSNumber *longSeconds = [f numberFromString:self.secondsLong.text];
 
-    FESCLLocationDegreesMinutesSeconds latitude = FESCLLocationDegreesMinutesSecondsMake((FESCLLocationDegrees)[latDegrees doubleValue],
-                                                                       (FESCLLocationMinutes)[latMinutes doubleValue],
-                                                                       (FESCLLocationSeconds)[latSeconds doubleValue]);
-    FESCLLocationDegreesMinutesSeconds longitude = FESCLLocationDegreesMinutesSecondsMake((FESCLLocationDegrees)[longDegrees doubleValue],
-                                                                        (FESCLLocationMinutes)[longMinutes doubleValue],
-                                                                        (FESCLLocationSeconds)[longSeconds doubleValue]);
-    FESCLLocationDegreesMinutesSeconds2D coordinate = FESCLLocationDegreesMinutesSeconds2DMake(latitude, longitude);
+    FESLocationDegreesMinutesSeconds latitude = FESLocationDegreesMinutesSecondsMake((FESLocationDegrees)[latDegrees doubleValue],
+                                                                       (FESLocationMinutes)[latMinutes doubleValue],
+                                                                       (FESLocationSeconds)[latSeconds doubleValue]);
+    FESLocationDegreesMinutesSeconds longitude = FESLocationDegreesMinutesSecondsMake((FESLocationDegrees)[longDegrees doubleValue],
+                                                                        (FESLocationMinutes)[longMinutes doubleValue],
+                                                                        (FESLocationSeconds)[longSeconds doubleValue]);
+    FESLocationDegreesMinutesSeconds2D coordinate = FESLocationDegreesMinutesSeconds2DMake(latitude, longitude);
     
     CLLocation *location = [CLLocation fes_initFromDegreesMinutesSeconds2D:coordinate];
 
