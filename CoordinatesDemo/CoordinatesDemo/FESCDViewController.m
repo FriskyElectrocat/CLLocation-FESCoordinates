@@ -60,13 +60,15 @@
     NSNumber *longMinutes = [f numberFromString:self.minutesLong.text];
     NSNumber *longSeconds = [f numberFromString:self.secondsLong.text];
 
-    FESCLLocationCoordinate2D latitude = FESCLLocationCoordinate2DMake((FESCLLocationDegrees)[latDegrees doubleValue],
-                                                                       (FESCLLocationMinutes)[latMinutes doubleValue],
-                                                                       (FESCLLocationSeconds)[latSeconds doubleValue]);
-    FESCLLocationCoordinate2D longitude = FESCLLocationCoordinate2DMake((FESCLLocationDegrees)[longDegrees doubleValue],
-                                                                        (FESCLLocationMinutes)[longMinutes doubleValue],
-                                                                        (FESCLLocationSeconds)[longSeconds doubleValue]);
-    CLLocation *location = [CLLocation fes_initFromDMSWithLatitude:latitude andLongitude:longitude];
+    FESLocationDegreesMinutesSeconds latitude = FESLocationDegreesMinutesSecondsMake((FESLocationDegrees)[latDegrees doubleValue],
+                                                                       (FESLocationMinutes)[latMinutes doubleValue],
+                                                                       (FESLocationSeconds)[latSeconds doubleValue]);
+    FESLocationDegreesMinutesSeconds longitude = FESLocationDegreesMinutesSecondsMake((FESLocationDegrees)[longDegrees doubleValue],
+                                                                        (FESLocationMinutes)[longMinutes doubleValue],
+                                                                        (FESLocationSeconds)[longSeconds doubleValue]);
+    FESLocationDegreesMinutesSeconds2D coordinate = FESLocationDegreesMinutesSeconds2DMake(latitude, longitude);
+    
+    CLLocation *location = [CLLocation fes_initFromDegreesMinutesSeconds2D:coordinate];
 
     self.coordinatesLabel.text = [NSString stringWithFormat:@"Latitude: %f Longitude: %f",
                                   location.coordinate.latitude,

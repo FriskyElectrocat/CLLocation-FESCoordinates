@@ -2,7 +2,7 @@
 //  CLLocation+FESCoordinates.m
 //
 //  Created by Dan Weeks on 2012-03-15.
-//  Copyright © 2012 Daniel Weeks.
+//  Copyright © 2012-2013 Daniel Weeks.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the “Software”), to deal
@@ -28,28 +28,39 @@ double FESMinutesInDegreeConstant = 60.0;
 double FESSecondsInMinuteConstant = 60.0;
 double FESSecondsInDegreeConstant = 3600.0;
 
-FESCLLocationCoordinate2D FESCLLocationCoordinate2DMake(FESCLLocationDegrees degrees, FESCLLocationMinutes minutes, FESCLLocationSeconds seconds)
+FESLocationDegreesMinutesSeconds FESLocationDegreesMinutesSecondsMake(FESLocationDegrees degrees,
+                                                                 FESLocationMinutes minutes,
+                                                                 FESLocationSeconds seconds)
 {
-    FESCLLocationCoordinate2D retValue;
+    FESLocationDegreesMinutesSeconds retValue;
     retValue.degrees = degrees;
     retValue.minutes = minutes;
     retValue.seconds = seconds;
     return retValue;
 }
 
-FESCLLocationDegreesMinDec FESCLLocationDegreesMinDecMake(FESCLLocationDegrees degrees,
-                                                                FESCLLocationMinutes minutes)
+FESLocationDegreesMinutesSeconds2D FESLocationDegreesMinutesSeconds2DMake(FESLocationDegreesMinutesSeconds latitude,
+                                                                              FESLocationDegreesMinutesSeconds longitude)
 {
-    FESCLLocationDegreesMinDec retValue;
+    FESLocationDegreesMinutesSeconds2D retValue;
+    retValue.latitude = latitude;
+    retValue.longitude = longitude;
+    return retValue;
+}
+
+FESLocationDegreesMinDec FESLocationDegreesMinDecMake(FESLocationDegrees degrees,
+                                                                FESLocationMinutes minutes)
+{
+    FESLocationDegreesMinDec retValue;
     retValue.degrees = degrees;
     retValue.minutes = minutes;
     return retValue;
 }
 
-FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latitude,
-                                                FESCLLocationDegreesMinDec longitude)
+FESLocationMinDec2D FESLocationMinDec2DMake(FESLocationDegreesMinDec latitude,
+                                                FESLocationDegreesMinDec longitude)
 {
-    FESCLLocationMinDec2D retValue;
+    FESLocationMinDec2D retValue;
     retValue.latitude = latitude;
     retValue.longitude = longitude;
     return retValue;
@@ -57,25 +68,23 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
 
 @implementation CLLocation (FESCoordinates)
 
-+ (CLLocation *)fes_initFromDMSWithLatitude:(FESCLLocationCoordinate2D)latitude
-                               andLongitude:(FESCLLocationCoordinate2D)longitude
++ (CLLocation *)fes_initFromDegreesMinutesSeconds2D:(FESLocationDegreesMinutesSeconds2D)coordinate;
 {
-    CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinate:latitude];
-    CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinate:longitude];
+    CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForDegreesMinutesSeconds:coordinate.latitude];
+    CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForDegreesMinutesSeconds:coordinate.longitude];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitudeDeg longitude:longitudeDeg];
     return location;
 }
 
-+ (CLLocation *)fes_initFromMinDecWithLatitude:(FESCLLocationDegreesMinDec)latitude
-                                  andLongitude:(FESCLLocationDegreesMinDec)longitude
++ (CLLocation *)fes_initFromMinDec2D:(FESLocationMinDec2D)coordinate
 {
-    CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:latitude];
-    CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForCoordinateMinDec:longitude];
+    CLLocationDegrees latitudeDeg = [CLLocation fes_decimalDegreesForDegreesMinDec:coordinate.latitude];
+    CLLocationDegrees longitudeDeg = [CLLocation fes_decimalDegreesForDegreesMinDec:coordinate.longitude];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:latitudeDeg longitude:longitudeDeg];
     return location;
 }
 
-+ (CLLocationDegrees)fes_decimalDegreesForCoordinate:(FESCLLocationCoordinate2D)coordinate
++ (CLLocationDegrees)fes_decimalDegreesForDegreesMinutesSeconds:(FESLocationDegreesMinutesSeconds)coordinate
 {
     NSInteger degreesSign = 1;
     if (coordinate.degrees < 0.0){
@@ -87,7 +96,7 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     return retDegrees;
 }
 
-+ (CLLocationDegrees)fes_decimalDegreesForCoordinateMinDec:(FESCLLocationDegreesMinDec)coordinate
++ (CLLocationDegrees)fes_decimalDegreesForDegreesMinDec:(FESLocationDegreesMinDec)coordinate
 {
     NSInteger degreesSign = 1;
     if (coordinate.degrees < 0.0){
@@ -98,7 +107,7 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     return retDegrees;
 }
 
-+ (FESCLLocationCoordinate2D)fes_coordinateForDecimalDegrees:(CLLocationDegrees)degrees_
++ (FESLocationDegreesMinutesSeconds)fes_degreesMinutesSecondsForDecimalDegrees:(CLLocationDegrees)degrees_
 {
 
     double seconds = round(fabs(degrees_ * FESSecondsInDegreeConstant));
@@ -110,12 +119,12 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     double minutes = seconds / FESSecondsInMinuteConstant;
     seconds = fmod(seconds, FESMinutesInDegreeConstant);
 
-    return FESCLLocationCoordinate2DMake((FESCLLocationDegrees)degrees,
-                                         (FESCLLocationMinutes)minutes,
-                                         (FESCLLocationSeconds)seconds);
+    return FESLocationDegreesMinutesSecondsMake((FESLocationDegrees)degrees,
+                                         (FESLocationMinutes)minutes,
+                                         (FESLocationSeconds)seconds);
 }
 
-+ (FESCLLocationDegreesMinDec)fes_minDecForDecimalDegrees:(CLLocationDegrees)degrees_
++ (FESLocationDegreesMinDec)fes_degreesMinDecForDecimalDegrees:(CLLocationDegrees)degrees_
 {
     // Let's get the whole number value for the degrees
     double degrees = floor(fabs(degrees_));
@@ -125,37 +134,81 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     if (degrees_ < 0.0) {
         degrees *= -1.0;
     }
-    
+
     // now for minutes
     double minutes = (fabs(degrees_) - fabs(degrees)) * FESMinutesInDegreeConstant;
-    
-    // and let's return our MinDec represtation.
-    return FESCLLocationDegreesMinDecMake((FESCLLocationDegrees)degrees,
-                                             (FESCLLocationMinutes)minutes);
+
+    // and let's return our MinDec representation.
+    return FESLocationDegreesMinDecMake((FESLocationDegrees)degrees,
+                                             (FESLocationMinutes)minutes);
 }
 
-+ (FESCLLocationMinDec2D)fes_minDec2DForCoordinate:(CLLocationCoordinate2D)coordinate
++ (FESLocationDegreesMinutesSeconds2D)fes_degreesMinutesSeconds2DForCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    
-    FESCLLocationDegreesMinDec latitude;
-    FESCLLocationDegreesMinDec longitude;
-    
-    latitude = [CLLocation fes_minDecForDecimalDegrees:coordinate.latitude];
-    longitude = [CLLocation fes_minDecForDecimalDegrees:coordinate.longitude];
-        
-    // and let's return our MinDec represtation.
-    return FESCLLocationMinDec2DMake(latitude, longitude);
+    FESLocationDegreesMinutesSeconds latitude = [CLLocation fes_degreesMinutesSecondsForDecimalDegrees:coordinate.latitude];
+    FESLocationDegreesMinutesSeconds longitude = [CLLocation fes_degreesMinutesSecondsForDecimalDegrees:coordinate.longitude];
+
+    // and let's return our MinDec representation.
+    return FESLocationDegreesMinutesSeconds2DMake(latitude, longitude);
 }
 
-+ (NSString *)fes_formattedStringForMinDecDegree:(FESCLLocationDegreesMinDec)degrees_ withAxis:(FESAxis)axis
++ (FESLocationMinDec2D)fes_degreesMinDec2DForCoordinate2D:(CLLocationCoordinate2D)coordinate
+{
+    FESLocationDegreesMinDec latitude = [CLLocation fes_degreesMinDecForDecimalDegrees:coordinate.latitude];
+    FESLocationDegreesMinDec longitude = [CLLocation fes_degreesMinDecForDecimalDegrees:coordinate.longitude];
+        
+    // and let's return our MinDec representation.
+    return FESLocationMinDec2DMake(latitude, longitude);
+}
+
++ (NSString *)fes_formattedStringForDegreesMinutesSeconds:(FESLocationDegreesMinutesSeconds)degrees_ withAxis:(FESAxis)axis
+{
+
+    NSString *direction = nil;
+
+    // convert the components of an FESLocationDegreesMinutesSeconds to NSNumbers
+    // so that they can be used by the NSNumber Formatter.
+    NSNumber *nDegrees = @(fabs(degrees_.degrees));
+    NSNumber *nMinutes = @(degrees_.minutes);
+    NSNumber *nSeconds = @(degrees_.seconds);
+
+    // Set up the formatter with the appropriate output format and convert
+    // our NSNumbers. format would look something like this: 123.4567
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setPositiveFormat:@"##0.####"];
+    NSString *degrees = [numberFormatter stringFromNumber:nDegrees];
+    NSString *minutes = [numberFormatter stringFromNumber:nMinutes];
+    NSString *seconds = [numberFormatter stringFromNumber:nSeconds];
+
+    // Based upon the access, we need to set the direction string based upon
+    // whether it's a postive or negative value.
+    if (axis == FESAxisLatitude) {
+        if (degrees_.degrees < 0.0) {
+            direction = @"S";
+        } else {
+            direction = @"N";
+        }
+    } else {  // FESAxisLongitude
+        if (degrees_.degrees < 0.0) {
+            direction = @"W";
+        } else {
+            direction = @"E";
+        }
+    }
+
+    // now return a formatted string using our converted degrees data.
+    return [NSString stringWithFormat:@"%@° %@′ %@″ %@", degrees, minutes, seconds, direction];
+}
+
++ (NSString *)fes_formattedStringForMinDecDegree:(FESLocationDegreesMinDec)degrees_ withAxis:(FESAxis)axis
 {
 
     NSString *direction = nil;
  
-    // convert the components of an FESCLLocationDegreesMinDec to NSNumbers
+    // convert the components of an FESLocationDegreesMinDec to NSNumbers
     // so that they can be used by the NSNumber Formatter.
-    NSNumber *nDegrees = [NSNumber numberWithDouble:degrees_.degrees];
-    NSNumber *nMinutes = [NSNumber numberWithDouble:degrees_.minutes];
+    NSNumber *nDegrees = @(fabs(degrees_.degrees));
+    NSNumber *nMinutes = @(degrees_.minutes);
     
     // Set up the formatter with the appropriate output format and convert
     // our NSNumbers. format would look something like this: 123.4567
@@ -166,17 +219,17 @@ FESCLLocationMinDec2D FESCLLocationMinDec2DMake(FESCLLocationDegreesMinDec latit
     
     // Based upon the access, we need to set the direction string based upon
     // whether it's a postive or negative value.
-    if (axis == kLatitude) {
-        if (degrees_.degrees < 0.0) {
-            direction = @"W";
-        } else {
-            direction = @"E";
-        }
-    } else {  // kLongitude
+    if (axis == FESAxisLatitude) {
         if (degrees_.degrees < 0.0) {
             direction = @"S";
         } else {
             direction = @"N";
+        }
+    } else {  // FESAxisLongitude
+        if (degrees_.degrees < 0.0) {
+            direction = @"W";
+        } else {
+            direction = @"E";
         }
     }
     
