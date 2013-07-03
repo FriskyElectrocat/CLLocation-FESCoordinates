@@ -2,7 +2,7 @@
 //  CLLocation+FESCoordinates.m
 //
 //  Created by Dan Weeks on 2012-03-15.
-//  Copyright © 2012-2013 Daniel Weeks.
+//  Copyright © 2012-2013 Daniel Weeks & Johnnie Pittman.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the “Software”), to deal
